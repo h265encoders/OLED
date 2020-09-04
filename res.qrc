@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/img"/>
+    <qresource prefix="/">
+        <file>icon/hdmi.png</file>
+        <file>icon/hdmi2.png</file>
+        <file>icon/sdi.png</file>
+    </qresource>
+</RCC>
