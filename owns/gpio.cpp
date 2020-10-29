@@ -21,7 +21,8 @@ void OwnGPIO::init(const QVariantList &param)
                 QVariantMap cfg=config[i].toMap();
                 if(btnName==cfg["gpio"].toString())
                 {
-                    RPC::create()->rpcClient->call(cfg["press"].toString());
+                    if(!cfg["press"].toString().isEmpty())
+                        RPC::create()->rpcClient->call(cfg["press"].toString());
                     break;
                 }
             }
@@ -49,7 +50,8 @@ void OwnGPIO::onGPIO(QString type, QVariant info)
                 QVariantMap cfg=config[i].toMap();
                 if(btnName==cfg["gpio"].toString())
                 {
-                    RPC::create()->rpcClient->call(cfg["click"].toString());
+                    if(!cfg["click"].toString().isEmpty())
+                        RPC::create()->rpcClient->call(cfg["click"].toString());
                     break;
                 }
             }
