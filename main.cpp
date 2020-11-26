@@ -1,6 +1,5 @@
 
 #include <QApplication>
-#include "view.h"
 #include "rpc.h"
 #include "router.h"
 

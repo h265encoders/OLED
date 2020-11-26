@@ -39,7 +39,6 @@ SOURCES += main.cpp\
     mods/br.cpp \
     mods/mod.cpp \
     owns/gpio.cpp \
-    view.cpp \
     mods/ipadr.cpp \
     mods/disk.cpp \
     mods/mem.cpp \
@@ -83,7 +82,6 @@ HEADERS  += jcon/jcon_assert.h \
     mods/br.h \
     mods/mod.h \
     owns/gpio.h \
-    view.h \
     mods/ipadr.h \
     mods/disk.h \
     mods/mem.h \
