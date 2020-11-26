@@ -16,6 +16,7 @@ bool ModTEMP::init(const double &left, const double &top, const double &width, c
             label->setGeometry(left,top,width,height);
             label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
             label->setFont(font);
+            label->show();
         }
         label->setText("TEMP:"+QString::number(res["temperature"].toInt()));
     }

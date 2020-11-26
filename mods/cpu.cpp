@@ -16,6 +16,7 @@ bool ModCPU::init(const double &left, const double &top, const double &width, co
             label->setGeometry(left,top,width,height);
             label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
             label->setFont(font);
+            label->show();
         }
         label->setText("CPU:"+QString::number(res["cpu"].toInt())+"%");
     }

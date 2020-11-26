@@ -1,12 +1,16 @@
 #include "icon.h"
 
-InputIcon::InputIcon(QWidget *parent) : QWidget(parent){}
-void InputIcon::upDraw(QString iconPath, int rotate, double scale)
+InputIcon::InputIcon(QWidget *parent) : QWidget(parent)
+{
+    this->resize(20,20);
+}
+void InputIcon::upDraw(QString iconPath, double scale)
 {
     path = iconPath;
-    rot = rotate;
     scl = scale;
-    update();
+
+    this->update();
+    this->show();
 }
 void InputIcon::paintEvent(QPaintEvent *)
 {
@@ -24,14 +28,4 @@ void InputIcon::paintEvent(QPaintEvent *)
         pix = pix.scaled(18*scl,16*scl,Qt::KeepAspectRatio);
         painter.drawPixmap(0,0,18*scl,16*scl,pix);
     }
-
-//    if(rot == 90)
-//    {
-//        painter.translate(10,0);
-//        painter.rotate(90);
-//    }
-//    if(path.contains("sdi"))
-//        painter.drawPixmap(0,0,18*0.8,16*0.8,pix);
-//    else
-//        painter.drawPixmap(0,0,20,7,pix);
 }

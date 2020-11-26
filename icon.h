@@ -10,11 +10,10 @@ class InputIcon : public QWidget
     Q_OBJECT
 public:
     explicit InputIcon(QWidget *parent = nullptr);
-    void upDraw(QString iconPath,int rotate,double scale);
+    void upDraw(QString iconPath,double scale);
 
 private:
     QString path = nullptr;
-    int rot = 0;
     double scl = 1;
     void paintEvent(QPaintEvent *);
 

@@ -1,5 +1,6 @@
 #include "rpc.h"
 #include "Json.h"
+#include "remote/remote.h"
 
 RPC::RPC(QObject *parent) : QObject(parent)
 {
@@ -17,6 +18,7 @@ void RPC::initRPC()
     rpcServer=new jcon::JsonRpcTcpServer();
     jcon::JsonRpcServer::ServiceMap map;
     map[this]="oled";
+    map[Remote::initRemote()]="remote";
     rpcServer->registerServices(map, ".");
     rpcServer->listen(6004);
 
@@ -44,7 +46,7 @@ bool RPC::update(QString json)
 void RPC::upDesignConfig(const QString &json)
 {
     QVariantMap design=Json::decode(json).toMap();
-    Json::saveFile(design,"/link/config/oled.json");
+    Json::saveFile(design,"/link/config/oled/oled.json");
 
     exit(0);
 }

@@ -13,6 +13,7 @@ bool ModREC::init(const double &left, const double &top, const double &width, co
         font.setPointSize(8);
         label->setFont(font);
         label->setText("REC: OFF");
+        label->show();
     }
 
     std::shared_ptr<jcon::JsonRpcResult> result = RPC::create()->rpcClient->call("wrec.isRecordState");

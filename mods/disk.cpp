@@ -21,6 +21,7 @@ bool ModDISK::init(const double &left, const double &top, const double &width, c
         QString used = res["used"].toString();
         QString total = res["total"].toString();
         label->setText("DISK: "+used+" / "+total);
+        label->show();
     }
 
     return importantChange;

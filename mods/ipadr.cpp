@@ -13,6 +13,7 @@ bool ModIP::init(const double &left, const double &top, const double &width, con
         font.setPointSize(9);
         label->setFont(font);
         label->setText("0.0.0.0");
+        label->show();
     }
 
     QVariantMap net=Json::loadFile("/link/config/net.json").toMap();

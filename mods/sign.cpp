@@ -29,6 +29,7 @@ bool ModHSIGN::init(const double &left, const double &top, const double &width, 
         label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         label->setFont(font);
         label->setText("HDMI: No input");
+        label->show();
         fac = handleFac().replace("\n","");
     }
     importantChange = false;

@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "view.h"
 #include "rpc.h"
+#include "router.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,8 +10,8 @@ int main(int argc, char *argv[])
     Link::init(false);
 
     RPC::create()->initRPC();
-    View::initView();
-    //LinkUI::initOLED(View::initView(),"ZJY64128",1,true);
-    //LinkUI::refreshOLED();
+
+    Router::init();
+    Router::linkTo("/modView");
     return a.exec();
 }

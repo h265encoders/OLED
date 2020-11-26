@@ -12,6 +12,7 @@ bool ModBR::init(const double &left, const double &top, const double &width, con
         label->setGeometry(left,top,width,height);
         label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         label->setFont(font);
+        label->show();
     }
     std::shared_ptr<jcon::JsonRpcResult> result = RPC::create()->rpcClient->call("push.getState");
     if (result->isSuccess()) {

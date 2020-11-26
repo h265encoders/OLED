@@ -1,16 +1,16 @@
 #ifndef INPUT_H
 #define INPUT_H
+
+#include <QHBoxLayout>
 #include "mod.h"
 #include "icon.h"
 
-struct Mark
+struct Place
 {
-    Mark() {}
-    double hScale = 1;
-    int topDiff = 0;
-    double sScale = 1;
-    int interval = 0;
-
+    Place() {}
+    double scale = 1;
+    int h_top = 0;
+    int s_top = 0;
 };
 
 class ModINPUT : public Mods
@@ -19,15 +19,16 @@ public:
     explicit ModINPUT(Mods *parent = 0);
     bool init(const double &left,const double &top,const double &width,const double &height,QWidget *parent);
 
-    void initMarkMap(const int &index,const double &hScale,const int &topDiff,const double &sScale,const int &interval);
+    void initPlaceMap(const int &index,const double &scale,const int &ht,const int &st);
 
 private:
     QString hIcon = ":/icon/hdmi.png";
     QString sIcon = ":/icon/sdi.png";
     QString nIcon = ":/icon/hdmi2.png";
 
-    QMap<int,InputIcon*> iconMap;
-    QMap<int,Mark*> markMap;
+    QWidget *iconBox = nullptr;
+    QHBoxLayout *layout = nullptr;
+    QMap<int,Place*> placeMap;
 
 };
 

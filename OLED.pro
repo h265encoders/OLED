@@ -48,7 +48,12 @@ SOURCES += main.cpp\
     icon.cpp \
     mods/sign.cpp \
     owns/own.cpp \
-    owns/rotate.cpp
+    owns/rotate.cpp \
+    router.cpp \
+    view/baseview.cpp \
+    view/modview.cpp \
+    view/tipview.cpp \
+    remote/remote.cpp
 
 HEADERS  += jcon/jcon_assert.h \
     jcon/jcon.h \
@@ -87,7 +92,12 @@ HEADERS  += jcon/jcon_assert.h \
     icon.h \
     mods/sign.h \
     owns/own.h \
-    owns/rotate.h
+    owns/rotate.h \
+    router.h \
+    view/baseview.h \
+    view/modview.h \
+    view/tipview.h \
+    remote/remote.h
 
 FORMS    += widget.ui
 
