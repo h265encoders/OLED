@@ -21,6 +21,7 @@ void BaseView::initView(const QString &tip)
         QVariantMap ownMap = own.toMap();
         QString name = ownMap["name"].toString();
         QVariantList param = ownMap["param"].toList();
+        qDebug() << name << "###";
         if(name == "INIT")
             LinkUI::initOLED(this,param[0].toString(),param[1].toInt(),param[2].toBool());
         if(name == "ROTATE")

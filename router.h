@@ -14,7 +14,7 @@ class Router : public QObject
 public:
 
     static void init();
-    static void linkTo(const QString &path = "/login",const QString &param = 0);
+    static void linkTo(const QString &path = "/modView",const QString &param = 0);
 
 private:
     explicit Router() = default;

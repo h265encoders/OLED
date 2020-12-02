@@ -1,6 +1,5 @@
 #include "rotate.h"
 #include <QMetaMethod>
-#include "view.h"
 
 REGISTER_STATIC_CLASS(OwnROTATE)
 OwnROTATE::OwnROTATE(Owns *parent) : Owns(parent){}
