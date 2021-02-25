@@ -32,7 +32,7 @@ bool ModINPUT::init(const double &left, const double &top, const double &width, 
         Place *place = placeMap[count];
         for(int i=0;i<count;i++)
         {
-            InputIcon *icon = new InputIcon(iconBox);
+            InputIcon *icon = getIconByIndex(i);
             int interval = (width - count*icon->width()*place->scale)/(count+1);
             if(count == 7)
                 interval = 2;
@@ -58,7 +58,7 @@ bool ModINPUT::init(const double &left, const double &top, const double &width, 
             else
             {
                 icon->upDraw(nIcon,place->scale);
-                icon->move(marginLeft,place->h_top);
+                icon->move(marginLeft,place->h_top+1);
             }
         }
     }
@@ -73,4 +73,15 @@ void ModINPUT::initPlaceMap(const int &index, const double &scale,const int &ht,
     place->s_top = st;
     placeMap[index] = place;
 }
+
+InputIcon *ModINPUT::getIconByIndex(const int &index)
+{
+    if(iconList.count() > index)
+        return iconList[index];
+
+    InputIcon *icon = new InputIcon(iconBox);
+    iconList << icon;
+    return icon;
+}
+
 

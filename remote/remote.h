@@ -24,6 +24,7 @@ protected:
     QTimer *pressTimer = nullptr;
     QString lastCode;
     QTimer *tipTimer = nullptr;
+    QVariantList definedLay;
 
     void controler(const QString &code,QString type = "tap");
     QVariantList handleConfig();
@@ -35,9 +36,12 @@ protected:
     void handleDhcp(const bool &type = 1);
     void handleReset();
     void handleReboot();
+    void handleLayout(const QVariantMap &layMap);
+    bool wtchRemote();
 
 
     QString writeCom(const QString &com);
+
 
 
 public slots:

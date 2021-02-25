@@ -13,6 +13,10 @@ Remote *Remote::initRemote()
 
 Remote::Remote(QObject *parent) : QObject(parent)
 {
+
+    if(!wtchRemote())
+        return;
+
     dev=Link::create("Device");
     dev->start();
     dev->invoke("enableIR");
@@ -21,7 +25,10 @@ Remote::Remote(QObject *parent) : QObject(parent)
 
     webSocketServer = new QWebSocketServer(QStringLiteral("Notify Server"),QWebSocketServer::NonSecureMode,this);
     if(!webSocketServer->listen(QHostAddress::Any,7857))
+    {
         qDebug() << "listen websocket error !!!";
+        return;
+    }
 
     connect(webSocketServer,SIGNAL(newConnection()),this,SLOT(onNewConnect()));
 
@@ -37,6 +44,7 @@ Remote::Remote(QObject *parent) : QObject(parent)
             tipTimer->stop();
         });
 
+    //definedLay = Json::loadFile("/link/config/defined.json").toList();
     this->updateConfig();
 }
 
@@ -172,6 +180,20 @@ void Remote::controler(const QString &code, QString type)
                 qDebug() << "restart";
                 this->handleReboot();
             }
+
+            //切换布局
+            if(!definedLay.isEmpty())
+            {
+                for(int i=0;i<definedLay.count();i++)
+                {
+                    QVariantMap layMap = definedLay[i].toMap();
+                    QString layName = layMap["layName"].toString();
+                    if(btn[type].toString() == layName)
+                        this->handleLayout(layMap);
+
+                }
+            }
+
             type = type.replace("CH","");
             type = type.replace("EN","");
             type += lang.toUpper();
@@ -323,6 +345,66 @@ void Remote::handleReset()
 void Remote::handleReboot()
 {
     writeCom("reboot");
+}
+
+void Remote::handleLayout(const QVariantMap &layMap)
+{
+    QVariantList layouts = layMap["layouts"].toList();
+
+    QStringList srcList;
+    QVariantList layList;
+    for(int i=0;i<layouts.count();i++)
+    {
+        QVariantMap lay;
+        QVariantMap map = layouts[i].toMap();
+        double touchW = map["touchW"].toDouble();
+        double touchH = map["touchH"].toDouble();
+        lay["x"] = map["posX"].toDouble()/touchW;
+        lay["y"] = map["posY"].toDouble()/touchH;
+        lay["w"] = map["width"].toDouble()/touchW;
+        lay["h"] = map["height"].toDouble()/touchH;
+        lay["index"] = map["index"];
+        layList << lay;
+        srcList << map["id"].toString();
+
+        qDebug() << lay;
+    }
+
+    QVariantList configs = handleConfig();
+    int indexMix = -1;
+    QVariantMap srcMap;
+    for(int i=0;i<configs.count();i++)
+    {
+        QVariantMap map = configs[i].toMap();
+        if(map["type"].toString() == "mix"){
+            indexMix = i;
+            srcMap = map;
+        }
+    }
+
+    if(index > 0 && !srcMap.isEmpty())
+    {
+        srcMap["srcV"] = srcList;
+        srcMap["layout"] = layList;
+        configs[indexMix] = srcMap;
+        qDebug() << srcMap["srcV"].toList();
+        RPC::create()->rpcClient->call("enc.update",Json::encode(configs));
+    }
+
+}
+
+bool Remote::wtchRemote()
+{
+    QString res = writeCom("cat /link/web/config.php");
+    if(res.contains("remote"))
+    {
+        res = res.mid(res.indexOf("$remote"));
+        res = res.replace(" ","");
+        res = res.mid(res.indexOf("=")+1,4);
+        if(res == "true")
+            return true;
+    }
+    return false;
 }
 
 

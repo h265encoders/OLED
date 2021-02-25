@@ -12,5 +12,6 @@ int main(int argc, char *argv[])
 
     Router::init();
     Router::linkTo("/modView");
+
     return a.exec();
 }

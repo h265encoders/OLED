@@ -18,7 +18,7 @@ bool ModIP::init(const double &left, const double &top, const double &width, con
 
     QVariantMap net=Json::loadFile("/link/config/net.json").toMap();
     if(QFile::exists("/sys/class/net/wlan0/operstate"))
-        net=Json::loadFile("/link/config/wifi.json").toMap();
+        net=Json::loadFile("/link/config/wfi.json").toMap();
 
     importantChange = false;
     if(label->text() != net["ip"].toString())

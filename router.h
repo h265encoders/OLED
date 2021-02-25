@@ -18,7 +18,6 @@ public:
 
 private:
     explicit Router() = default;
-    //static QList<BaseView*> viewList;
 
 };
 

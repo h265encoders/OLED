@@ -19,8 +19,6 @@ public:
     explicit ModINPUT(Mods *parent = 0);
     bool init(const double &left,const double &top,const double &width,const double &height,QWidget *parent);
 
-    void initPlaceMap(const int &index,const double &scale,const int &ht,const int &st);
-
 private:
     QString hIcon = ":/icon/hdmi.png";
     QString sIcon = ":/icon/sdi.png";
@@ -29,7 +27,10 @@ private:
     QWidget *iconBox = nullptr;
     QHBoxLayout *layout = nullptr;
     QMap<int,Place*> placeMap;
+    QList<InputIcon*> iconList;
 
+    void initPlaceMap(const int &index,const double &scale,const int &ht,const int &st);
+    InputIcon *getIconByIndex(const int &index = 0);
 };
 
 #endif // INPUT_H
