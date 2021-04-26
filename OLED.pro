@@ -52,7 +52,8 @@ SOURCES += main.cpp\
     view/baseview.cpp \
     view/modview.cpp \
     view/tipview.cpp \
-    remote/remote.cpp
+    remote/remote.cpp \
+    mods/chn.cpp
 
 HEADERS  += jcon/jcon_assert.h \
     jcon/jcon.h \
@@ -95,7 +96,8 @@ HEADERS  += jcon/jcon_assert.h \
     view/baseview.h \
     view/modview.h \
     view/tipview.h \
-    remote/remote.h
+    remote/remote.h \
+    mods/chn.h
 
 FORMS    += widget.ui
 

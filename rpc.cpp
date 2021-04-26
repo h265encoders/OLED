@@ -18,7 +18,9 @@ void RPC::initRPC()
     rpcServer=new jcon::JsonRpcTcpServer();
     jcon::JsonRpcServer::ServiceMap map;
     map[this]="oled";
+#ifdef HI3521D
     map[Remote::initRemote()]="remote";
+#endif
     rpcServer->registerServices(map, ".");
     rpcServer->listen(6004);
 
