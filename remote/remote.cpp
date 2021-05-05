@@ -44,7 +44,7 @@ Remote::Remote(QObject *parent) : QObject(parent)
             tipTimer->stop();
         });
 
-    //definedLay = Json::loadFile("/link/config/defined.json").toList();
+    definedLay = Json::loadFile("/link/config/defLays.json").toList();
     this->updateConfig();
 }
 
@@ -349,25 +349,23 @@ void Remote::handleReboot()
 
 void Remote::handleLayout(const QVariantMap &layMap)
 {
+
     QVariantList layouts = layMap["layouts"].toList();
 
-    QStringList srcList;
+    QVariantList srcList;
     QVariantList layList;
     for(int i=0;i<layouts.count();i++)
     {
-        QVariantMap lay;
-        QVariantMap map = layouts[i].toMap();
-        double touchW = map["touchW"].toDouble();
-        double touchH = map["touchH"].toDouble();
-        lay["x"] = map["posX"].toDouble()/touchW;
-        lay["y"] = map["posY"].toDouble()/touchH;
-        lay["w"] = map["width"].toDouble()/touchW;
-        lay["h"] = map["height"].toDouble()/touchH;
-        lay["index"] = map["index"];
-        layList << lay;
-        srcList << map["id"].toString();
 
-        qDebug() << lay;
+        QVariantMap map = layouts[i].toMap();
+        QVariantMap pos = map["pos"].toMap();
+
+        layList << pos;
+        int id = map["id"].toString().toInt();
+        if(id < 0)
+            srcList << "-1";
+        else
+            srcList << map["id"].toString();
     }
 
     QVariantList configs = handleConfig();
@@ -387,7 +385,6 @@ void Remote::handleLayout(const QVariantMap &layMap)
         srcMap["srcV"] = srcList;
         srcMap["layout"] = layList;
         configs[indexMix] = srcMap;
-        qDebug() << srcMap["srcV"].toList();
         RPC::create()->rpcClient->call("enc.update",Json::encode(configs));
     }
 
