@@ -39,20 +39,20 @@ JsonRpcEndpoint::~JsonRpcEndpoint()
 
 bool JsonRpcEndpoint::connectToHost(const QString& host, int port, int msecs)
 {
-    m_logger->logInfo(QString("connecting to JSON RPC server at %1:%2")
-                      .arg(host).arg(port));
+//    m_logger->logInfo(QString("connecting to JSON RPC server at %1:%2")
+//                      .arg(host).arg(port));
 
     m_socket->connectToHost(host, port);
 
     if (!m_socket->waitForConnected(msecs)) {
-        m_logger->logError("could not connect to JSON RPC server: " +
-                           m_socket->errorString());
+//        m_logger->logError("could not connect to JSON RPC server: " +
+//                           m_socket->errorString());
         return false;
     }
 
-    m_logger->logInfo(QString("connected to JSON RPC server %1:%2 "
-                              "(local port: %3)")
-                      .arg(host).arg(port).arg(m_socket->localPort()));
+//    m_logger->logInfo(QString("connected to JSON RPC server %1:%2 "
+//                              "(local port: %3)")
+//                      .arg(host).arg(port).arg(m_socket->localPort()));
     return true;
 }
 

@@ -380,7 +380,7 @@ void Remote::handleLayout(const QVariantMap &layMap)
         }
     }
 
-    if(index > 0 && !srcMap.isEmpty())
+    if(indexMix > 0 && !srcMap.isEmpty())
     {
         srcMap["srcV"] = srcList;
         srcMap["layout"] = layList;

@@ -28,7 +28,7 @@ public:
                     QObject* parent = nullptr);
     virtual ~JsonRpcEndpoint();
 
-    bool connectToHost(const QString& host, int port, int msecs = 5000);
+    bool connectToHost(const QString& host, int port, int msecs = 500);
     void connectToHostAsync(const QString& host, int port);
     bool connectToUrl(const QUrl& url, int msecs = 5000);
     void connectToUrlAsync(const QUrl& url);
