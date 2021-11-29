@@ -16,7 +16,7 @@ bool ModREC::init(const double &left, const double &top, const double &width, co
         label->show();
     }
 
-    std::shared_ptr<jcon::JsonRpcResult> result = RPC::create()->rpcClient->call("wrec.isRecordState");
+    std::shared_ptr<jcon::JsonRpcResult> result = RPC::create()->rpcClient->call("rec.isRecordState");
     if (result->isSuccess()) {
         //QVariantMap res = result->result().toMap();
         bool res = result->result().toBool();

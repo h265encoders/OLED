@@ -15,7 +15,7 @@ bool ModDISK::init(const double &left, const double &top, const double &width, c
         label->setText("DISK: -- / --");
     }
 
-    std::shared_ptr<jcon::JsonRpcResult> result = RPC::create()->rpcClient->call("wrec.getState");
+    std::shared_ptr<jcon::JsonRpcResult> result = RPC::create()->rpcClient->call("rec.getState");
     if (result->isSuccess()) {
         QVariantMap res = result->result().toMap();
         QString used = res["used"].toString();

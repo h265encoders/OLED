@@ -31,6 +31,7 @@ bool RPC::updateRPC()
 {
     if(!rpcClient->isConnected())
     {
+        rpcClient->disconnectFromServer();
         rpcClient->connectToServer("127.0.0.1", 6001);
         return false;
     }
